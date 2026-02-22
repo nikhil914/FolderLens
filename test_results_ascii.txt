@@ -1,0 +1,27 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  FolderLens.Core -> C:\Work\windows\File Size app\FolderLens\FolderLens.Core\bin\Debug\net8.0\FolderLens.Core.dll
+  FolderLens.Core.Tests -> C:\Work\windows\File Size app\FolderLens\FolderLens.Core.Tests\bin\Debug\net8.0\FolderLens.Core.Tests.dll
+Test run for C:\Work\windows\File Size app\FolderLens\FolderLens.Core.Tests\bin\Debug\net8.0\FolderLens.Core.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+dotnet : [xUnit.net 00:00:00.10]     
+FolderLens.Core.Tests.StandardScannerTests.ScanAsync_Returns_Correct_Sizes_And_Counts [FAIL]
+At line:1 char:49
++ ... le Size app\FolderLens" ; dotnet test > test_results.txt 2>&1 ; Get-C ...
++                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([xUnit.net 00:0...d_Counts [FAIL]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Failed FolderLens.Core.Tests.StandardScannerTests.ScanAsync_Returns_Correct_Sizes_And_Counts [18 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 1
+Actual:   3
+  Stack Trace:
+     at FolderLens.Core.Tests.StandardScannerTests.ScanAsync_Returns_Correct_Sizes_And_Counts() in C:\Work\windows\File Size app\FolderLens\FolderLens.Core.Tests\StandardScannerTests.cs:line 42
+--- End of stack trace from previous location ---
+
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 22 ms - FolderLens.Core.Tests.dll (net8.0)

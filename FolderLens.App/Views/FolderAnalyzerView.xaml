@@ -1,0 +1,126 @@
+<UserControl x:Class="FolderLens.App.Views.FolderAnalyzerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="clr-namespace:FolderLens.Core.Models;assembly=FolderLens.Core"
+             xmlns:conv="clr-namespace:FolderLens.App.Converters">
+    <UserControl.Resources>
+        <conv:SizeConverter x:Key="SizeConverter"/>
+
+        <HierarchicalDataTemplate DataType="{x:Type models:FolderNode}" ItemsSource="{Binding Subfolders}">
+            <Grid Margin="4,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="140" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding Name}" FontWeight="Medium" Foreground="#2D3748" VerticalAlignment="Center"/>
+
+                <Grid Grid.Column="1" Margin="8,0">
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding PercentageOfParent}" 
+                                 Height="18" Foreground="#4299E1" Background="#EDF2F7" BorderThickness="0">
+                        <ProgressBar.Clip>
+                            <RectangleGeometry RadiusX="4" RadiusY="4" Rect="0,0,120,18"/>
+                        </ProgressBar.Clip>
+                    </ProgressBar>
+                    <TextBlock Text="{Binding PercentageOfParent, StringFormat={}{0:F1}%}" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               FontSize="10" FontWeight="SemiBold" Foreground="#2D3748"/>
+                </Grid>
+
+                <TextBlock Grid.Column="2" Text="{Binding Size, Converter={StaticResource SizeConverter}}" 
+                           VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#4A5568" 
+                           FontWeight="Medium" FontSize="12"/>
+
+                <TextBlock Grid.Column="3" Text="{Binding FileCount, StringFormat={}{0:N0} files}" 
+                           VerticalAlignment="Center" Foreground="#A0AEC0" Margin="12,0" FontSize="12"/>
+            </Grid>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+
+    <Grid Background="#F0F2F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <Border Grid.Row="0" Background="White" BorderBrush="#E2E8F0" BorderThickness="0,0,0,1" Padding="20,14">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="📂  Select Folder..." Command="{Binding SelectFolderAndScanCommand}" 
+                        Padding="14,8" FontSize="13" FontWeight="Medium" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="btn" Background="#4299E1" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="btn" Property="Background" Value="#3182CE"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="btn" Property="Background" Value="#2B6CB0"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Foreground>
+                        <SolidColorBrush Color="White"/>
+                    </Button.Foreground>
+                </Button>
+
+                <Button Content="Cancel" Command="{Binding CancelScanCommand}" IsEnabled="{Binding IsScanning}" 
+                        Padding="14,8" Margin="10,0,0,0" FontSize="13" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="btn" Background="#FED7D7" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="btn" Property="Background" Value="#FEB2B2"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="btn" Property="Opacity" Value="0.4"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Foreground>
+                        <SolidColorBrush Color="#C53030"/>
+                    </Button.Foreground>
+                </Button>
+
+                <Border Background="#EDF2F7" CornerRadius="6" Padding="12,8" Margin="16,0,0,0" 
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding SelectedPath}" Foreground="#4A5568" FontSize="12"
+                               MaxWidth="500" TextTrimming="CharacterEllipsis"/>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <!-- Tree View -->
+        <Border Grid.Row="1" Background="White" Margin="16" CornerRadius="8" 
+                BorderBrush="#E2E8F0" BorderThickness="1">
+            <TreeView ItemsSource="{Binding RootNodes}" Background="Transparent" 
+                      BorderThickness="0" Padding="8"
+                      VirtualizingStackPanel.IsVirtualizing="True" 
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True"/>
+                        <Setter Property="Foreground" Value="#2D3748"/>
+                        <Setter Property="Padding" Value="2,1"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+            </TreeView>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#E2E8F0" BorderThickness="0,1,0,0" Padding="20,10">
+            <TextBlock Text="{Binding ProgressText}" Foreground="#4A5568" FontSize="12"/>
+        </Border>
+    </Grid>
+</UserControl>

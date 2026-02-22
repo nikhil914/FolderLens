@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderLens.App", "FolderLens.App\FolderLens.App.csproj", "{B8FD9C7F-4C55-4E5B-BCA9-48D0DE7CD35A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderLens.Core.Tests", "FolderLens.Core.Tests\FolderLens.Core.Tests.csproj", "{3BB00B99-DD6D-489A-93F9-5B0EF9B36FEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8FD9C7F-4C55-4E5B-BCA9-48D0DE7CD35A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8FD9C7F-4C55-4E5B-BCA9-48D0DE7CD35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8FD9C7F-4C55-4E5B-BCA9-48D0DE7CD35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8FD9C7F-4C55-4E5B-BCA9-48D0DE7CD35A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB00B99-DD6D-489A-93F9-5B0EF9B36FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB00B99-DD6D-489A-93F9-5B0EF9B36FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB00B99-DD6D-489A-93F9-5B0EF9B36FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB00B99-DD6D-489A-93F9-5B0EF9B36FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
